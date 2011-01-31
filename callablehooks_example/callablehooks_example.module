@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * Register 2 example hooks.
+ */
+callablehooks()->register_hook('example_foo', 'callablehooks_example_foo_callback') // A function callback.
+  ->register_hook('example_bar', array('CallableHooksExample', 'bar')); // A static method on a class.
+
+function callablehooks_example_menu() {
+  $items = array();
+  $items['foo'] = array(
+    'title' => 'Foo Test',
+    'page callback' => 'callablehooks_example_foo',
+    'access arguments' => array('access content'),
+  );
+  $items['bar'] = array(
+    'title' => 'Bar Test',
+    'page callback' => 'callablehooks_example_bar',
+    'access arguments' => array('access content'),
+  );
+  return $items;
+}
+
+function callablehooks_example_foo() {
+  $output = callablehooks()->invokeAll('example_foo', 'this', 'is', 'a', 'test');
+  
+  return implode(' ', $output);
+}
+
+function callablehooks_example_bar() {
+  $callbacks = callablehooks()->invoke_iterator('example_bar');
+
+  $output = '';
+  foreach ($callbacks as $callback) {
+    $output .= $callback->invoke('pirate', 'talk');
+  }
+
+  return $output;
+}
+
+/**
+ * Implements hook example_foo.
+ */
+function callablehooks_example_foo_callback($a, $b, $c, $d) {
+  return $a . ' ' . $b . ' ' . $c . ' ' . $d;
+}

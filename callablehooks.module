@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Provides for anything callable in PHP to be a hook.
+ */
+
+/**
+ * Get the Callable Hooks controller object.
+ *
+ * For more detail see the CallableHooks class.
+ *
+ * @return CallableHooks
+ */
+function callablehooks() {
+  static $controller = NULL;
+
+  if (!isset($controller)) {
+    $controller = new CallableHooks();
+  }
+
+  return $controller;
+}
+
+/**
+ * Implements hook_boot().
+ */
+function callablehooks_boot() {
+  // We implement this so the module is included early.
+}

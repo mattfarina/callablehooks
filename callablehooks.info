@@ -1,0 +1,5 @@
+name = Callable Hooks
+description = Provides a method for Drupal hooks of anything callable in PHP.
+
+core = 7.x
+files[] = callablehooks.inc

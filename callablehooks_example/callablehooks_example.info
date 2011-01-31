@@ -1,0 +1,7 @@
+name = Callable Hooks Example
+description = Example of Callable Hooks
+
+core = 7.x
+files[] = callablehooks_example.inc
+
+dependencies[] = callablehooks
